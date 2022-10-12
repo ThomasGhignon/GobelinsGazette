@@ -4,6 +4,12 @@
 GobelinsGazette est un genre de Reddit adapté à l'école Gobelins. Les utilisateurs peuvent créer des posts et voter pour leurs posts préférés. Ils peuvent également chercher un posts par rapport à son titre et/ou les filtrer par date.
 
 ## Workflow
+Arborescence des branches :
++ main
++ dev
+  + dev-luca
+  + dev-thomas
+
 ### Thomas
 + Base de données
 + Models
@@ -15,6 +21,9 @@ GobelinsGazette est un genre de Reddit adapté à l'école Gobelins. Les utilisa
 + Twig
 + Webpack
 + Workflow
++ UML
++ Filtres
++ Recherche
 
 ## Base de données
 https://www.figma.com/file/3MSW4G1lM3H3NKTgFdU5bN/GobelinsGazette-UML?node-id=0%3A1
