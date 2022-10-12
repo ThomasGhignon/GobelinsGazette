@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserFormType;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,27 +40,8 @@ class UserController extends AbstractController
         ]);
     }
 
-    public function login(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $user = new User();
-        $form = $this->createForm(UserFormType::class, $user);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_user_show', ['id' => $user->getId()]);
-        }
-
-        return $this->render('pages/user/auth/loginView.html.twig', [
-            'login_form' => $form->createView(),
-        ]);
-    }
-
     //show
-    public function show(int $id): Response
+    public function show(ManagerRegistry $doctrine, int $id): Response
     {
         $user = $doctrine->getRepository(User::class)->find($id);
 
