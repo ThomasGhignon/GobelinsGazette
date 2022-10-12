@@ -1,7 +1,11 @@
 # GobelinsGazette
 
 ## Concept
-GobelinsGazette est un genre de Reddit adapté à l'école Gobelins. Les utilisateurs peuvent créer des posts et voter pour leurs posts préférés. Ils peuvent également chercher un posts par rapport à son titre et/ou les filtrer par date.
+GobelinsGazette est un genre de Reddit adapté à l'école Gobelins.
+Les utilisateurs peuvent :
++ Créer des posts et voter pour leurs posts préférés
++ Chercher un posts par rapport à son titre et/ou les filtrer par date
++ Supprimer un post qu'ils ont publié
 
 ## Workflow
 Arborescence des branches :
