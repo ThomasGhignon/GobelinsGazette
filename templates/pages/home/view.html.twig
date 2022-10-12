@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+    <div class="container vh-100">
+        {% import "utils/flash.html.twig" as utils %}
+        {{ utils.flash(app.flashes) }}
+        <div class="row">
+            <div class="col-12 mt-5">
+                <div class="d-flex justify-content-between">
+                    <h1>Articles</h1>
+                    {{ app.request.getLocale() }}
+                    <div class="d-flex align-items-center">
+                        <a href="/post/new" class="btn btn-primary">Create</a>
+                    </div>
+                </div>
+                <div class="list-group w-auto">
+                    {% for post in posts %}
+                        <a href="/post/{{ post.id }}" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{{ post.title }}</h5>
+{#                                <small>{{ post.createdAt|date('d/m/Y') }}</small>#}
+                            </div>
+                            <p class="mb-1">{{ post.content }}</p>
+                            <small>{{ post.author }}</small>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

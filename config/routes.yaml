@@ -1,3 +1,16 @@
-controllers:
-    resource: ../src/Controller/
-    type: attribute
+app_home:
+    path: /
+    controller: App\Controller\HomeController::index
+app_home_flash:
+    path: /flash
+    controller: App\Controller\HomeController::flashMessage
+
+app_post:
+    path: /post
+    controller: App\Controller\PostController::index
+app_post_new:
+    path: /post/new
+    controller: App\Controller\PostController::create
+app_post_id:
+    path: /post/{id}
+    controller: App\Controller\PostController::show
