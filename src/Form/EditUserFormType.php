@@ -61,7 +61,9 @@ class EditUserFormType extends AbstractType
             ;
         }
         $builder
-            ->add('valider', SubmitType::class);
+            ->add('valider', SubmitType::class, [
+                'attr' => ['class' =>'btn btn-primary bg-indigo-600 hover:bg-indigo-700'],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

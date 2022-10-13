@@ -3,6 +3,44 @@
 {% block title %}Modifier un utilisateur{% endblock %}
 
 {% block content %}
-    <h1>Modifier un utilisateur</h1>
-    {{ form(userForm) }}
+    {# <h1>Modifier un utilisateur</h1>
+    {{ form(userForm) }} #}
+    <div class="mx-auto max-w-lg flex justify-center mt-20 pb-48">
+        <div>
+            <h1 class="h3 mb-4 font-weight-normal">Register</h1>
+
+            {{ form_start(userForm) }}
+                <div>
+                    <div class="form-group mb-2">
+                        <label class="form-label">
+                            <span class="d-block mb-2">Username</span>
+                            {{ form_widget(userForm.username, {'attr': {'class': 'form-control'}}) }}
+                        </label>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label class="form-label">
+                            <span class="d-block mb-2">Email</span>
+                            {{ form_widget(userForm.email, {'attr': {'class': 'form-control'}}) }}
+                        </label>
+                    </div>
+                    {# <div class="form-group mb-2">
+                        <label class="form-label">
+                            <span class="d-block mb-2">Password</span>
+                            {{ form_widget(userForm.plainPassword, {
+                                label: 'Password',
+                                'attr': {'class': 'form-control'}
+                            }) }}
+                        </label>
+                    </div> #}
+                    <div class="form-group mb-2">
+                        <label class="form-label">
+                            <span class="d-block mb-2">Rôles</span>
+                            {{ form_widget(userForm.roles) }}
+                        </label>
+                    </div>
+
+                </div>
+            {{ form_end(userForm) }}
+        </div>
+    </div>
 {% endblock %}
