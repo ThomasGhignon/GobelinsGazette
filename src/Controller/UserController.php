@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UserController extends AbstractController
 {
@@ -22,7 +23,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    public function create(Request $request, EntityManagerInterface $entityManager): Response
+    public function create(Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         $user = new User();
         $form = $this->createForm(UserFormType::class, $user);
@@ -42,9 +43,12 @@ class UserController extends AbstractController
     }
 
     //show
-    public function show(ManagerRegistry $doctrine, int $id): Response
+    public function show(ManagerRegistry $doctrine, int $id, TranslatorInterface $translator): Response
     {
         $user = $doctrine->getRepository(User::class)->find($id);
+
+        // Traductions
+        $modifier = $translator->trans('Modifier');
 
         if (!$user) {
             throw $this->createNotFoundException(
@@ -54,10 +58,11 @@ class UserController extends AbstractController
 
         return $this->render('pages/user/index.html.twig', [
             'user' => $user,
+            'modifier' => $modifier,
         ]);
     }
 
-    public function edit($id, ManagerRegistry $doctrine, Request $request): Response
+    public function edit($id, ManagerRegistry $doctrine, Request $request, TranslatorInterface $translator): Response
     {
         $user = $doctrine->getRepository(User::class)->find($id);
         if ($user !== $this->getUser() && !$this->isGranted('ROLE_ADMIN')) {

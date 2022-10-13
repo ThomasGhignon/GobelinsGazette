@@ -11,7 +11,7 @@
         <div>
           <div class="flex place-content-between mb-4">
             <h1 class="h1 m-0 p-0">{{ user.username }}</h1>
-            <a href="/user/edit/{{ user.id }}" class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Modifier</a>
+            <a href="/user/edit/{{ user.id }}" class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">{{ modifier }}</a>
           </div>
           <div>
             <div class="user-info mb-4">
@@ -40,8 +40,7 @@
                       </div>
                       <div class="txt-lg">{{ post.title }}</div>
                     </div>
-                    {# <small>{{ post.createdAt|date('d/m/Y') }}</small> #}
-                    <small>15/09/2022</small>
+                    <small>{{ post.createAt|date('d/m/Y h:m') }}</small>
                   </div>
                   <div class="mb-1">
                     {% if post.content|length %}
