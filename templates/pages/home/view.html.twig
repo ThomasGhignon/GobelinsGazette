@@ -21,7 +21,10 @@
                     {% for post in posts %}
                         <a href="/post/{{ post.id }}" class="list-group-item list-group-item-action">
                             <div class="d-flex w-100 justify-content-between items-end border-b-2 pb-2 mb-3">
-                                <div class="text-xl pb-0 mb-0">{{ post.title }}</div>
+                                <div class="text-xl pb-0 mb-0">
+                                    <small>{{ post.likes }}</small>
+                                    {{ post.title }}
+                                </div>
                                {# <small>{{ post.createdAt|date('d/m/Y') }}</small> #}
                                 <small>15/09/2022</small>
                             </div>
