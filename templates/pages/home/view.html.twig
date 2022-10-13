@@ -12,7 +12,6 @@
             <div class="col-12 mt-5">
                 <div class="flex items-center justify-content-between pb-4 ">
                     <h1>Articles</h1>
-                    {# {{ app.request.getLocale() }} #}
                     <div class="d-flex align-items-center">
                         <a href="/post/new" class="btn btn-primary bg-indigo-600">Nouveau</a>
                     </div>
@@ -26,7 +25,6 @@
                                 <small>15/09/2022</small>
                             </div>
                             <p class="mb-1">{{ post.content }}</p>
-                            <small>{{ post.author }}</small>
                         </a>
                     {% endfor %}
                 </div>

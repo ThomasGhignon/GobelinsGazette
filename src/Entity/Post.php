@@ -27,7 +27,6 @@ class Post
     private ?int $likes = null;
 
     #[ORM\ManyToOne(inversedBy: 'posts')]
-//    #[Assert\Choice(choices: ['admin', 'guest'])]
     private ?User $author = null;
 
     private string $currentState = 'draft';
