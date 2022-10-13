@@ -14,3 +14,20 @@ app_post_new:
 app_post_id:
     path: /post/{id}
     controller: App\Controller\PostController::show
+
+#app_user_create:
+#    path: /user/create
+#    controller: App\Controller\UserController::create
+app_user_show:
+    path: /user/{id}
+    controller: App\Controller\UserController::show
+
+app_register:
+    path: /signup
+    controller: App\Controller\RegistrationController::register
+app_login:
+    path: /login
+    controller: App\Controller\AuthController::login
+app_logout:
+    path: /logout
+    controller: App\Controller\AuthController::logout

@@ -64,6 +64,10 @@ class PostController extends AbstractController
     {
         $post = $doctrine->getRepository(Post::class)->find($id);
 
+        if (!$post) {
+            return $this->render('pages/post/single.html.twig');
+        }
+
         return $this->render('pages/post/single.html.twig', [
             'post' => $post,
         ]);
