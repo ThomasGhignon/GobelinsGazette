@@ -31,3 +31,13 @@ app_login:
 app_logout:
     path: /logout
     controller: App\Controller\AuthController::logout
+
+app_admin:
+    path: /admin
+    controller: App\Controller\AdminController::index
+app_admin_users:
+    path: /admin/users
+    controller: App\Controller\AdminController::usersList
+app_admin_user:
+    path: /admin/user/{id}
+    controller: App\Controller\UserController::edit
