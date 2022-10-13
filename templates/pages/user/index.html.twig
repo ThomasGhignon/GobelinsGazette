@@ -9,7 +9,10 @@
     <div class="row">
       <div class="col-10 mt-5 mx-auto">
         <div>
-          <h1 class="h1 mb-4">{{ user.username }}</h1>
+          <div class="flex place-content-between mb-4">
+            <h1 class="h1 m-0 p-0">{{ user.username }}</h1>
+            <a href="/user/edit/{{ user.id }}" class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Modifier</a>
+          </div>
           <div>
             <div class="user-info mb-4">
               <div>{{ user.email }}</div>
