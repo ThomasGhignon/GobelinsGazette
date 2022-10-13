@@ -40,8 +40,7 @@
                       </div>
                       <div class="txt-lg">{{ post.title }}</div>
                     </div>
-                    {# <small>{{ post.createdAt|date('d/m/Y') }}</small> #}
-                    <small>15/09/2022</small>
+                    <small>{{ post.createAt|date('d/m/Y h:m') }}</small>
                   </div>
                   <div class="mb-1">
                     {% if post.content|length %}
