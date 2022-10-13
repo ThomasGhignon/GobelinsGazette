@@ -17,23 +17,6 @@ class PostFormType extends AbstractType
         $builder
             ->add('title')
             ->add('content', TextareaType::class)
-            ->add('likes')
-            //fill author with default value
-            //->add('author', EntityType::class, [
-            //    'class' => User::class,
-            //    'choice_label' => 'username',
-            //    'data' => $this->security->getUser(),
-            //])
-            ->add(
-                'author',ChoiceType::class
-//                [
-//                'choices'  => [
-//                    'admin' => 1,
-//                    'subscriber' => 2,
-//                    'guest' => 3,
-//                ],
-//            ]
-            )
             ->add('submit',
                 SubmitType::class,
                 [
