@@ -31,6 +31,15 @@ class Post
 
     private string $currentState = 'draft';
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $create_at = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $delete_at = null;
+
+    #[ORM\Column(length: 1000, nullable: true)]
+    private ?string $image = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -99,6 +108,42 @@ class Post
     public function setCurrentState(string $currentState): Post
     {
         $this->currentState = $currentState;
+        return $this;
+    }
+
+    public function getCreateAt(): ?\DateTimeInterface
+    {
+        return $this->create_at;
+    }
+
+    public function setCreateAt(\DateTimeInterface $create_at): self
+    {
+        $this->create_at = $create_at;
+
+        return $this;
+    }
+
+    public function getDeleteAt(): ?\DateTimeInterface
+    {
+        return $this->delete_at;
+    }
+
+    public function setDeleteAt(?\DateTimeInterface $delete_at): self
+    {
+        $this->delete_at = $delete_at;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
         return $this;
     }
 }
