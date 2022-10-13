@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\EditUserFormType;
 use App\Form\UserFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -53,6 +54,26 @@ class UserController extends AbstractController
 
         return $this->render('pages/user/index.html.twig', [
             'user' => $user,
+        ]);
+    }
+
+    public function edit($id, ManagerRegistry $doctrine, Request $request): Response
+    {
+        $user = $doctrine->getRepository(User::class)->find($id);
+        $form = $this->createForm(EditUserFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $this->addFlash('message', 'Utilisateur modifié avec succès');
+            return $this->redirectToRoute('app_admin_users');
+        }
+
+        return $this->render('admin/edituser.html.twig', [
+            'userForm' => $form->createView(),
         ]);
     }
 }
