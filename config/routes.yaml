@@ -15,12 +15,12 @@ app_post_id:
     path: /post/{id}
     controller: App\Controller\PostController::show
 
-#app_user_create:
-#    path: /user/create
-#    controller: App\Controller\UserController::create
 app_user_show:
     path: /user/{id}
     controller: App\Controller\UserController::show
+app_user_edit:
+    path: /user/edit/{id}
+    controller: App\Controller\UserController::edit
 
 app_register:
     path: /signup

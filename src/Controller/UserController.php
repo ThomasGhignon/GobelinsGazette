@@ -60,6 +60,10 @@ class UserController extends AbstractController
     public function edit($id, ManagerRegistry $doctrine, Request $request): Response
     {
         $user = $doctrine->getRepository(User::class)->find($id);
+        if ($user !== $this->getUser() && !$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException();
+        }
+
         $form = $this->createForm(EditUserFormType::class, $user);
         $form->handleRequest($request);
 
