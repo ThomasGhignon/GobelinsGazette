@@ -25,16 +25,6 @@
                         <label for="post-content">Content</label>
                         {{ form_widget(post_form.content, {'attr': {'class': 'form-control', 'row': '20', 'id' : 'post-content'}}) }}
                     </div>
-                    <div class="form-group row d-flex w-100 mb-4">
-                        <div class="col-1">
-                            <label for="post-likes">Likes</label>
-                            {{ form_widget(post_form.likes, {'attr': {'class': 'form-control', 'placeholder': '0', 'id' : 'post-likes'}}) }}
-                        </div>
-                        <div class="col-2 ml-1">
-                            <label for="post-author">Author</label>
-                            {{ form_widget(post_form.author, {'attr': {'class': 'form-control', 'id' : 'post-author'}}) }}
-                        </div>
-                    </div>
                     {{ form_row(post_form.submit) }}
                 </form>
                 {{ form_end(post_form) }}
