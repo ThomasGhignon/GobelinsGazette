@@ -5,25 +5,25 @@
 {% block content %}
     <div class="mx-auto max-w-lg flex justify-center mt-20 pb-48">
         <div>
-            <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+            <h1 class="h3 mb-4 font-weight-normal">Register</h1>
 
             {{ form_start(registrationForm) }}
                 <div>
                     <div class="form-group mb-2">
                         <label class="form-label">
-                            <span>Username</span>
+                            <span class="d-block mb-2">Username</span>
                             {{ form_widget(registrationForm.username, {'attr': {'class': 'form-control'}}) }}
                         </label>
                     </div>
                     <div class="form-group mb-2">
                         <label class="form-label">
-                            <span>Email</span>
+                            <span class="d-block mb-2">Email</span>
                             {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
                         </label>
                     </div>
                     <div class="form-group mb-2">
                         <label class="form-label">
-                            <span>Password</span>
+                            <span class="d-block mb-2">Password</span>
                             {{ form_widget(registrationForm.plainPassword, {
                                 label: 'Password',
                                 'attr': {'class': 'form-control'}
@@ -33,7 +33,7 @@
                     <div class="form-group mb-2">
                         <label class="form-label">
                             {{ form_widget(registrationForm.agreeTerms) }}
-                            <span>Agree to terms</span>
+                            <span class="d-block mb-2">Agree to terms</span>
                         </label>
                     </div>
 
