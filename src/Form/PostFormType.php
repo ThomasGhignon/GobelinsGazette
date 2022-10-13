@@ -38,7 +38,7 @@ class PostFormType extends AbstractType
                 SubmitType::class,
                 [
                     'attr' => [
-                        'class' => 'btn btn-primary'
+                        'class' => 'btn btn-primary shadow-sm hover:bg-indigo-700 bg-indigo-600'
                     ]
                 ])
         ;
