@@ -10,19 +10,20 @@
         {{ utils.flash(app.flashes) }}
         <div class="row">
             <div class="col-12 mt-5">
-                <div class="d-flex justify-content-between">
+                <div class="flex items-center justify-content-between pb-4 ">
                     <h1>Articles</h1>
-                    {{ app.request.getLocale() }}
+                    {# {{ app.request.getLocale() }} #}
                     <div class="d-flex align-items-center">
-                        <a href="/post/new" class="btn btn-primary">Create</a>
+                        <a href="/post/new" class="btn btn-primary bg-indigo-600">Nouveau</a>
                     </div>
                 </div>
                 <div class="list-group w-auto">
                     {% for post in posts %}
                         <a href="/post/{{ post.id }}" class="list-group-item list-group-item-action">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">{{ post.title }}</h5>
-{#                                <small>{{ post.createdAt|date('d/m/Y') }}</small>#}
+                            <div class="d-flex w-100 justify-content-between items-end border-b-2 pb-2 mb-3">
+                                <div class="text-xl pb-0 mb-0">{{ post.title }}</div>
+                               {# <small>{{ post.createdAt|date('d/m/Y') }}</small> #}
+                                <small>15/09/2022</small>
                             </div>
                             <p class="mb-1">{{ post.content }}</p>
                             <small>{{ post.author }}</small>
