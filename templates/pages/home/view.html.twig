@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-  Index
+  Accueil
 {% endblock %}
 
 {% block head %}
-  {{ parent() }}
+    {{ parent() }}
 {% endblock %}
 
 {% block content %}
@@ -36,14 +36,14 @@
                 {# <small>{{ post.createdAt|date('d/m/Y') }}</small> #}
                 <small>15/09/2022</small>
               </div>
-              <p class="mb-1">
+              <div class="mb-1">
                 {% if post.content|length %}
                   <p>{{ (post.content|length) > 800 ? (post.content|slice(0, 801)|split(' ')|slice(0, - 1)|join(' ')) ~ ' …' : post.content }}</p>
                 {% else %}
                   <p class="meta">** Pas de description **</p>
                 {% endif %}
-              </p>
-              <small>{{ post.author }}</small>
+              </div>
+{#              <small>{{ post.author }}</small>#}
             </a>
           {% endfor %}
         </div>

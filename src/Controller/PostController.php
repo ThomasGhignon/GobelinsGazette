@@ -38,7 +38,11 @@ class PostController extends AbstractController
 
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
+        if (!$this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
         $post = new Post();
+        $post->setAuthor($this->getUser());
         $form = $this->createForm(PostFormType::class, $post);
 
         $form->handleRequest($request);
