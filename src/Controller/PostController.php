@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Entity\User;
 use App\Form\PostFormType;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -69,6 +70,7 @@ class PostController extends AbstractController
     public  function show(ManagerRegistry $doctrine, int $id): Response
     {
         $post = $doctrine->getRepository(Post::class)->find($id);
+        $user = $doctrine->getRepository(User::class)->find($post->getAuthor());
 
         if (!$post) {
             return $this->render('pages/post/single.html.twig');
@@ -76,6 +78,7 @@ class PostController extends AbstractController
 
         return $this->render('pages/post/single.html.twig', [
             'post' => $post,
+            'user' => $user,
         ]);
     }
 }
