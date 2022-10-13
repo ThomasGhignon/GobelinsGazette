@@ -43,6 +43,8 @@ class PostController extends AbstractController
         }
         $post = new Post();
         $post->setAuthor($this->getUser());
+        $post->setCreateAt(new \DateTime());
+        $post->setLikes(0);
         $form = $this->createForm(PostFormType::class, $post);
 
         $form->handleRequest($request);

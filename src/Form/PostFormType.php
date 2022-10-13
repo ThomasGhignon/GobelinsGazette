@@ -17,6 +17,7 @@ class PostFormType extends AbstractType
         $builder
             ->add('title')
             ->add('content', TextareaType::class)
+            ->add('image')
             ->add('submit',
                 SubmitType::class,
                 [
