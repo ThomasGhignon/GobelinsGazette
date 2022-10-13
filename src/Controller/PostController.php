@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Workflow\Registry;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PostController extends AbstractController
 {
@@ -36,7 +37,7 @@ class PostController extends AbstractController
         ]);
     }
 
-    public function create(Request $request, EntityManagerInterface $entityManager): Response
+    public function create(Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         if (!$this->getUser()) {
             throw $this->createAccessDeniedException();
@@ -61,21 +62,38 @@ class PostController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
+        // Traductions
+        $motdepasse = $translator->trans('Mot de passe');
+        $titre = $translator->trans('Titre');
+        $contenu = $translator->trans('Contenu');
+        $creerunnouveaupost = $translator->trans('Créer un nouveau post');
+
+
         return $this->render('pages/post/create.html.twig', [
             'post_form' => $form->createView(),
+            'creerunnouveaupost' => $creerunnouveaupost,
+            'motdepasse' => $motdepasse,
+            'titre' => $titre,
+            'contenu' => $contenu,
         ]);
     }
 
-    public  function show(ManagerRegistry $doctrine, int $id): Response
+    public  function show(ManagerRegistry $doctrine, int $id, TranslatorInterface $translator): Response
     {
         $post = $doctrine->getRepository(Post::class)->find($id);
 
-        if (!$post) {
-            return $this->render('pages/post/single.html.twig');
-        }
+        // Traductions
+        $retour = $translator->trans('Retour en arrière');
 
+        if (!$post) {
+            return $this->render('pages/post/single.html.twig', [
+                'retour' => $retour,
+            ]);
+        }
+        
         return $this->render('pages/post/single.html.twig', [
             'post' => $post,
+            'retour' => $retour,
         ]);
     }
 }

@@ -10,19 +10,28 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class HomeController extends AbstractController
 {
-    public function index(ManagerRegistry $doctrine): Response
+    public function index(ManagerRegistry $doctrine, TranslatorInterface $translator): Response
     {
         $posts = $doctrine->getRepository(Post::class)->findAll();
+
+        // Traductions
+        $connexion = $translator->trans('Connexion');
+        $inscription = $translator->trans('Inscription');
+        $nouveau = $translator->trans('Nouveau');
 
         if (!$posts) {
             throw $this->createNotFoundException(
                 'No posts found'
             );
         }
-        return $this->render('pages/home/view.html.twig', array('posts' => $posts));
+        return $this->render('pages/home/view.html.twig', array(
+            'posts' => $posts,
+            'nouveau' => $nouveau,
+        ));
     }
 
     public function flashMessage(): \Symfony\Component\HttpFoundation\RedirectResponse
