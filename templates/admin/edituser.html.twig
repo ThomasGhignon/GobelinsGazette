@@ -32,13 +32,14 @@
                             }) }}
                         </label>
                     </div> #}
+                    {% if userForm.roles is defined %}
                     <div class="form-group mb-2">
                         <label class="form-label">
                             <span class="d-block mb-2">Rôles</span>
                             {{ form_widget(userForm.roles) }}
                         </label>
                     </div>
-
+                    {% endif %}
                 </div>
             {{ form_end(userForm) }}
         </div>
