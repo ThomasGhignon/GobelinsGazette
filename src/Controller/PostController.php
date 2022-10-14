@@ -102,8 +102,15 @@ class PostController extends AbstractController
             $this->addFlash('message', 'Post modifié avec succès');
             return $this->redirectToRoute('app_home');
         }
+
+        // Traductions
+        $titre = $translator->trans('Titre');
+        $contenu = $translator->trans('Contenu');
+        
         return $this->render('pages/post/edit.html.twig', [
             'post_form' => $form->createView(),
+            'titre' => $titre,
+            'contenu' => $contenu,
         ]);
     }
 

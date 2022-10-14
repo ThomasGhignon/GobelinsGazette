@@ -6,7 +6,38 @@
 
 {% block content %}
 
-    {{ form(post_form) }}
+    <div class="container vh-100">
+        <div class="row">
+            <div class="col-12 mt-5 w-9/12 mx-auto">
+                <div class="d-flex justify-content-between">
+                    <h1 class="text-2xl mb-6">Éditer un post</h1>
+                </div>
+                {{ form_start(post_form) }}
+                {{ form_row(post_form._token) }}
+                <form>
+                    <div class="my-custom-class-for-errors">
+                        {{ form_errors(post_form) }}
+                    </div>
+                    <div class="form-group mb-2">
+                        <label class="form-label">
+                            <span>{{ titre }}</span>
+                            {{ form_widget(post_form.title, {'attr': {'class': 'form-control'}}) }}
+                        </label>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="post-content">{{ contenu }}</label>
+                        {{ form_widget(post_form.content, {'attr': {'class': 'form-control', 'row': '20', 'id' : 'post-content'}}) }}
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="post-content">Image</label>
+                        {{ form_widget(post_form.image, {'attr': {'class': 'form-control', 'id' : 'post-image', 'placeholder' : 'https://....'}}) }}
+                    </div>
+                    {{ form_row(post_form.submit) }}
+                </form>
+                {{ form_end(post_form) }}
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
 
