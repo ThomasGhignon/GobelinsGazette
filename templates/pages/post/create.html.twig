@@ -23,11 +23,11 @@
                         </label>
                     </div>
                     <div class="form-group mb-2">
-                        <label for="post-content">{{ contenu }}</label>
+                        <label class="form-label" for="post-content">{{ contenu }}</label>
                         {{ form_widget(post_form.content, {'attr': {'class': 'form-control', 'row': '20', 'id' : 'post-content'}}) }}
                     </div>
                     <div class="form-group mb-2">
-                        <label for="post-content">Image</label>
+                        <label class="form-label" for="post-content">Image</label>
                         {{ form_widget(post_form.image, {'attr': {'class': 'form-control', 'id' : 'post-image', 'placeholder' : 'https://....'}}) }}
                     </div>
                     {{ form_row(post_form.submit) }}

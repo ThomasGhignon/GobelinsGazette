@@ -11,10 +11,10 @@
         <div class="d-flex align-items-center justify-between mb-4">
           <a href="/" class="btn text-white bg-indigo-600 hover:bg-indigo-700">{{ retour }}</a>
           {% if post.author.id == app.user.id %}
-          <div class="flex">
-            <a href="/post/edit/{{ post.id }}" class="btn text-white bg-indigo-600 hover:bg-indigo-700 mr-2">Modifier</a>
-            <a href="/post/delete/{{ post.id }}" class="btn text-white bg-indigo-600 hover:bg-indigo-700">Supprimer</a>
-          </div>
+            <div class="flex">
+              <a href="/post/edit/{{ post.id }}" class="btn text-white bg-indigo-600 hover:bg-indigo-700 mr-2">Modifier</a>
+              <a href="/post/delete/{{ post.id }}" class="btn text-white bg-indigo-600 hover:bg-indigo-700">Supprimer</a>
+            </div>
           {% endif %}
         </div>
         <h1 class="h2">{{ post.title }}</h1>
@@ -52,6 +52,15 @@
             <img class="mb-3" src="{{ post.image }}" alt="post image" />
           {% endif %}
           <div>{{ post.content }}</div>
+        </div>
+
+        <div>
+          <form action="/upload-comment.php">
+            <div class="form-group">
+              <label class="form-label" for="commentaire">Ajouter un commentaire</label>
+              <textarea id="commentaire" name="commentaire" class="form-control" rows="3" ></textarea>
+            </div>
+          </form>
         </div>
       </div>
     </div>
