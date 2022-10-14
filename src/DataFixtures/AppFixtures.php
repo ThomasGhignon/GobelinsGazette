@@ -24,7 +24,6 @@ class AppFixtures extends Fixture
         $user->setPassword($this->hasher->hashPassword($user, 'azerty'));
         $user->setRoles(['ROLE_USER']);
         $manager->persist($user);
-        $manager->flush();
 
         for ( $i = 0; $i < 10; $i++ ) {
             $post = new post();
@@ -34,7 +33,6 @@ class AppFixtures extends Fixture
             $post->setLikes(0);
             $post->setCreateAt(new \DateTime());
             $manager->persist($post);
-            $manager->flush();
         }
 
         $user = new User();
@@ -43,7 +41,6 @@ class AppFixtures extends Fixture
         $user->setPassword($this->hasher->hashPassword($user, 'azerty'));
         $user->setRoles(['ROLE_USER', 'ROLE_ADMIN', 'ROLE_EDITOR']);
         $manager->persist($user);
-        $manager->flush();
 
         for ( $i = 0; $i < 2; $i++ ) {
             $post = new post();
@@ -53,7 +50,8 @@ class AppFixtures extends Fixture
             $post->setLikes(0);
             $post->setCreateAt(new \DateTime());
             $manager->persist($post);
-            $manager->flush();
         }
+
+        $manager->flush();
     }
 }

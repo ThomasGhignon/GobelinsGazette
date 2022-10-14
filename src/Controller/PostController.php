@@ -22,22 +22,6 @@ class PostController extends AbstractController
 
     }
 
-    public function index(): Response
-    {
-        $post = new Post();
-        $workflow = $this->registry->get($post, 'blog_publishing');
-//        $workflow->can($post, 'to_review'); // true
-//        $workflow->can($post, 'reject'); // true
-//        $workflow->can($post, 'publish'); // false
-//        dd($workflow->getEnabledTransitions($post));
-//        $workflow->apply($post, 'to_review');
-//        $workflow->apply($post, 'publish'); // throws an exception
-//        dd($post);
-        return $this->render('pages/post/index.html.twig', [
-            'controller_name' => 'PostController',
-        ]);
-    }
-
     public function create(Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         if (!$this->getUser()) {
@@ -97,6 +81,29 @@ class PostController extends AbstractController
             'post' => $post,
             'user' => $user,
             'retour' => $retour,
+        ]);
+    }
+
+    public function edit($id, ManagerRegistry $doctrine, Request $request, TranslatorInterface $translator): Response
+    {
+        $post = $doctrine->getRepository(Post::class)->find($id);
+        if ($post->getAuthor() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $form = $this->createForm(PostFormType::class, $post);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($post);
+            $entityManager->flush();
+
+            $this->addFlash('message', 'Post modifié avec succès');
+            return $this->redirectToRoute('app_home');
+        }
+        return $this->render('pages/post/edit.html.twig', [
+            'post_form' => $form->createView(),
         ]);
     }
 }
