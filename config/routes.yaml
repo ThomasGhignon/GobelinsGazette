@@ -14,6 +14,9 @@ app_post_id:
 app_post_edit:
     path: /post/edit/{id}
     controller: App\Controller\PostController::edit
+app_post_delete:
+    path: /post/delete/{id}
+    controller: App\Controller\PostController::delete
 
 app_user_show:
     path: /user/{id}

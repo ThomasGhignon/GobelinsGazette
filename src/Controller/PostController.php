@@ -106,4 +106,20 @@ class PostController extends AbstractController
             'post_form' => $form->createView(),
         ]);
     }
+
+    // delete post
+    public function delete($id, ManagerRegistry $doctrine, TranslatorInterface $translator): Response
+    {
+        $post = $doctrine->getRepository(Post::class)->find($id);
+        if ($post->getAuthor() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($post);
+        $entityManager->flush();
+
+        $this->addFlash('message', 'Post supprimé avec succès');
+        return $this->redirectToRoute('app_home');
+    }
 }
