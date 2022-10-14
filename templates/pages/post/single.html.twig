@@ -42,7 +42,9 @@
         </div>
 
         <div class="mt-3 mb-3">
-          <img class="mb-3" src="{{ post.image }}" alt="post image" />
+          {% if post.image is not empty %}
+            <img class="mb-3" src="{{ post.image }}" alt="post image" />
+          {% endif %}
           <div>{{ post.content }}</div>
         </div>
       </div>
