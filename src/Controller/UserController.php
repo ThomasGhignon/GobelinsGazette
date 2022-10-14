@@ -23,25 +23,6 @@ class UserController extends AbstractController
         ]);
     }
 
-    public function create(Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
-    {
-        $user = new User();
-        $form = $this->createForm(UserFormType::class, $user);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_home');
-        }
-
-        return $this->render('pages/user/auth/registerView.html.twig', [
-            'register_form' => $form->createView(),
-        ]);
-    }
-    
     public function show(ManagerRegistry $doctrine, int $id, TranslatorInterface $translator): Response
     {
         $user = $doctrine->getRepository(User::class)->find($id);
