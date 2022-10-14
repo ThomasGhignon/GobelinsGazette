@@ -41,8 +41,7 @@ class UserController extends AbstractController
             'register_form' => $form->createView(),
         ]);
     }
-
-    //show
+    
     public function show(ManagerRegistry $doctrine, int $id, TranslatorInterface $translator): Response
     {
         $user = $doctrine->getRepository(User::class)->find($id);
@@ -51,9 +50,7 @@ class UserController extends AbstractController
         $modifier = $translator->trans('Modifier');
 
         if (!$user) {
-            throw $this->createNotFoundException(
-                'No user found for id '.$id
-            );
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('pages/user/index.html.twig', [
