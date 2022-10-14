@@ -87,7 +87,7 @@ class PostController extends AbstractController
     public function edit($id, ManagerRegistry $doctrine, Request $request, TranslatorInterface $translator): Response
     {
         $post = $doctrine->getRepository(Post::class)->find($id);
-        if ($post->getAuthor() !== $this->getUser()) {
+        if ($post->getAuthor() !== $this->getUser() && !$this->isGranted('ROLE_ADMIN')) {
             throw $this->createAccessDeniedException();
         }
 
@@ -107,11 +107,10 @@ class PostController extends AbstractController
         ]);
     }
 
-    // delete post
     public function delete($id, ManagerRegistry $doctrine, TranslatorInterface $translator): Response
     {
         $post = $doctrine->getRepository(Post::class)->find($id);
-        if ($post->getAuthor() !== $this->getUser()) {
+        if ($post->getAuthor() !== $this->getUser() && !$this->isGranted('ROLE_ADMIN')) {
             throw $this->createAccessDeniedException();
         }
 

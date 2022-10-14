@@ -44,3 +44,9 @@ app_admin_users:
 app_admin_user:
     path: /admin/user/{id}
     controller: App\Controller\UserController::edit
+app_admin_posts:
+    path: /admin/posts
+    controller: App\Controller\AdminController::postsList
+app_admin_post:
+    path: /admin/post/{id}
+    controller: App\Controller\PostController::edit

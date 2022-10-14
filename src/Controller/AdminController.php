@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\EditUserFormType;
+use App\Repository\PostRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +26,13 @@ class AdminController extends AbstractController
     {
         return $this->render('admin/users.html.twig', [
             'users' => $users->findAll(),
+        ]);
+    }
+
+    public function postsList(PostRepository $posts): Response
+    {
+        return $this->render('admin/posts.html.twig', [
+            'users' => $posts->findAll(),
         ]);
     }
 }
