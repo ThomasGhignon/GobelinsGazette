@@ -8,8 +8,14 @@
   <div class="container min-h-screen mt-4">
     <div class="row">
       <div class="col-10 mx-auto">
-        <div class="d-flex align-items-center mb-4">
-          <a href="/" class="btn btn-primary bg-indigo-600 hover:bg-indigo-700">{{ retour }}</a>
+        <div class="d-flex align-items-center justify-between mb-4">
+          <a href="/" class="btn text-white bg-indigo-600 hover:bg-indigo-700">{{ retour }}</a>
+          {% if post.author.id == app.user.id %}
+          <div class="flex">
+            <a href="/" class="btn text-white bg-indigo-600 hover:bg-indigo-700 mr-2">Modifier</a>
+            <a href="/" class="btn text-white bg-indigo-600 hover:bg-indigo-700">Supprimer</a>
+          </div>
+          {% endif %}
         </div>
         <h1 class="h2">{{ post.title }}</h1>
         <div class="d-flex">
