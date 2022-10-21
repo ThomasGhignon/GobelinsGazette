@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="">
-          {% for post in posts %}
+          {% for post in posts|sort|reverse %}
             <a href="/post/{{ post.id }}" class="d-block border-2 rounded-md p-3 mb-3">
               <div class="d-flex w-100 justify-content-between items-end border-b-2 pb-2 mb-3">
                 <div class="flex flex-row items-center text-xl pb-0 mb-0">

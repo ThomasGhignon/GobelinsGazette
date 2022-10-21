@@ -55,6 +55,7 @@ class PostController extends AbstractController
         $titre = $translator->trans('Titre');
         $contenu = $translator->trans('Contenu');
         $creerunnouveaupost = $translator->trans('Créer un nouveau post');
+        $retour = $translator->trans('Retour');
 
 
         return $this->render('pages/post/create.html.twig', [
@@ -63,6 +64,7 @@ class PostController extends AbstractController
             'motdepasse' => $motdepasse,
             'titre' => $titre,
             'contenu' => $contenu,
+            'retour' => $retour,
         ]);
     }
 
@@ -128,8 +130,17 @@ class PostController extends AbstractController
             $this->addFlash('message', 'Post modifié avec succès');
             return $this->redirectToRoute('app_home');
         }
+
+        // Traductions
+        $titre = $translator->trans('Titre');
+        $contenu = $translator->trans('Contenu');
+        $retour = $translator->trans('Retour');
+        
         return $this->render('pages/post/edit.html.twig', [
             'post_form' => $form->createView(),
+            'titre' => $titre,
+            'contenu' => $contenu,
+            'retour' => $retour,
         ]);
     }
 
