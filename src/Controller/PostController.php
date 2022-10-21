@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Post;
 use App\Entity\User;
+use App\Form\CommentType;
 use App\Form\PostFormType;
 
+use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -63,11 +66,11 @@ class PostController extends AbstractController
         ]);
     }
 
-    public  function show(ManagerRegistry $doctrine, int $id, TranslatorInterface $translator): Response
+    public  function show(ManagerRegistry $doctrine, EntityManagerInterface $entityManager, Request $request, int $id, TranslatorInterface $translator): Response
     {
         $post = $doctrine->getRepository(Post::class)->find($id);
         $user = $doctrine->getRepository(User::class)->find($post->getAuthor());
-
+        $comments = $doctrine->getRepository(Comment::class)->findBy(['post_parent' => $id]);
         // Traductions
         $retour = $translator->trans('Retour en arrière');
 
@@ -76,11 +79,34 @@ class PostController extends AbstractController
                 'retour' => $retour,
             ]);
         }
+
+        //get all comments
+
+//        $comment = $this->forward('App\Controller\CommentController::new');
+//        dd($comment);
+        $comment = new Comment();
+        $comment->setAuthor($this->getUser());
+        $comment->setPostParent($post);
+        $comment->setCreateAt(new \DateTime());
+        $comment->setLikes(0);
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment_workflow = $this->registry->get($comment, 'comment_publishing');
+            $comment_workflow->apply($comment, 'to_review');
+            $entityManager->persist($comment);
+            $entityManager->flush();
+            
+            return $this->redirectToRoute('app_post_show', ['id' => $id]);
+        }
         
         return $this->render('pages/post/single.html.twig', [
             'post' => $post,
+            'comments' => $comments,
             'user' => $user,
             'retour' => $retour,
+            'comment_form' => $form->createView(),
         ]);
     }
 

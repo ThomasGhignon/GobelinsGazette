@@ -24,3 +24,27 @@ framework:
                 reject:
                     from: [review, draft]
                     to: rejected
+        comment_publishing:
+            type: 'state_machine'               # state_machine : the state is unique (default)
+            #type: 'workflow'                   # workflow : the state can be multiple but to transit to another state, you need to validate all previous states
+            marking_store:
+                type: 'method'
+                property: 'status'        # the property of the entity that will be used to store the current state
+            supports:
+                - App\Entity\Comment
+            initial_marking: draft              # the initial state
+            places:                             # the list of all possible states
+                - draft
+                - review
+                - rejected
+                - published
+            transitions:                        # the list of all possible transitions
+                to_review:                      # the name of the transition
+                    from: draft                 # the list of states from which the transition is possible
+                    to: review                  # the list of states to which the transition is possible
+                publish:
+                    from: review
+                    to: published
+                reject:
+                    from: [review, draft]
+                    to: rejected

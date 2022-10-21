@@ -8,7 +8,7 @@ app_home_flash:
 app_post_new:
     path: /post/new
     controller: App\Controller\PostController::create
-app_post_id:
+app_post_show:
     path: /post/{id}
     controller: App\Controller\PostController::show
 app_post_edit:
