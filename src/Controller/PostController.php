@@ -82,10 +82,6 @@ class PostController extends AbstractController
             ]);
         }
 
-        //get all comments
-
-//        $comment = $this->forward('App\Controller\CommentController::new');
-//        dd($comment);
         $comment = new Comment();
         $comment->setAuthor($this->getUser());
         $comment->setPostParent($post);
@@ -105,9 +101,9 @@ class PostController extends AbstractController
         
         return $this->render('pages/post/single.html.twig', [
             'post' => $post,
-            'comments' => $comments,
             'user' => $user,
             'retour' => $retour,
+            'comments' => $comments,
             'comment_form' => $form->createView(),
         ]);
     }

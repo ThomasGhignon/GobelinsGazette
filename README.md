@@ -4,8 +4,25 @@
 GobelinsGazette est un genre de Reddit adapté à l'école Gobelins.
 Les utilisateurs peuvent :
 + Créer des posts et voter pour leurs posts préférés
-+ Chercher un posts par rapport à son titre et/ou les filtrer par date
++ Chercher un post par rapport à son titre et/ou les filtrer par date
 + Supprimer un post qu'ils ont publié
+
+## Utilisation
+Après avoir installé toutes les dépendances et Webpack :
++ `npm run watch` pour lancer Webpack
++ `symfony server:start` pour lancer le serveur Symfony
++ `symfony console doctrine:database:create` pour créer la base de données
++ `symfony console doctrine:migrations:migrate` pour créer les tables
++ `symfony console doctrine:fixtures:load` pour charger les fixtures
+
+Une fois que le site et ready :
++ Vous pouvez créer un compte en cliquant sur le bouton "Sign up" ou vous connecter :
+    + En tant qu'utilisateur par défaut : 
+      + email : `foo@gmail.com`
+      + password : `azerty`
+    + En tant qu'admin : 
+      + email : `test@gmail.com`
+      + password : `azerty`
 
 ## Workflow
 Arborescence des branches :
@@ -19,6 +36,10 @@ Arborescence des branches :
 + Models
 + Authentification
 + Validation
++ Routes
++ Controllers
++ Recherche
++ Twig
 
 ### Luca
 + Front-end

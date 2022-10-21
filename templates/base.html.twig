@@ -28,6 +28,9 @@
             </div>
             <nav class="space-x-10 md:flex">
               <!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->
+              {% if is_granted('ROLE_ADMIN') %}
+                <a href="/admin" class="text-base font-medium text-gray-500 hover:text-gray-900">Admin</a>
+              {% endif %}
               <a href="/" class="text-base font-medium text-gray-500 hover:text-gray-900">Posts</a>
               <a href="/post/new" class="text-base font-medium text-gray-500 hover:text-gray-900">Nouveau</a>
               {# <a href="/user/1" class="text-base font-medium text-gray-500 hover:text-gray-900">Utilisateurs</a> #}

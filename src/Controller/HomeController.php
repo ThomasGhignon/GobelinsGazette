@@ -24,9 +24,7 @@ class HomeController extends AbstractController
         $nouveau = $translator->trans('Nouveau');
 
         if (!$posts) {
-            throw $this->createNotFoundException(
-                'No posts found'
-            );
+            $this->redirect('app_home');
         }
         return $this->render('pages/home/view.html.twig', array(
             'posts' => $posts,

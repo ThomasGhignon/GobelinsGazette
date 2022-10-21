@@ -32,7 +32,7 @@ class AdminController extends AbstractController
     public function postsList(PostRepository $posts): Response
     {
         return $this->render('admin/posts.html.twig', [
-            'users' => $posts->findAll(),
+            'posts' => $posts->findAll(),
         ]);
     }
 }
