@@ -1,20 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Admin{% endblock %}
 
 {% block content %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/ghignonthomas/Documents/Gobelins/Symfony/GobelinsGazette/src/Controller/AdminController.php'|file_link(0) }}">src/Controller/AdminController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/ghignonthomas/Documents/Gobelins/Symfony/GobelinsGazette/templates/admin/index.html.twig'|file_link(0) }}">templates/admin/index.html.twig</a></code></li>
-    </ul>
+<div class="container min-h-screen">
+    <div class="row">
+        <div class="col-12 mt-5 w-9/12 mx-auto">
+            <div class="mb-10">
+                <h1 class="h2">Accès d'administration</h1>
+                <small>(Vous êtes connecté en tant qu'administrateur)</small>
+            </div>
+            <div class="mb-10">
+                <p class="mb-2">Vous pouvez accéder à la liste des utilisateurs en cliquant sur le bouton ci-dessous</p>
+                <a href="{{ path('app_admin_users') }}" class="btn btn-primary">Liste des utilisateurs</a>
+            </div>
+            <div class="mb-10">
+                <p class="mb-2">Vous pouvez accéder à la liste des posts en cliquant sur le bouton ci-dessous</p>
+                <a href="{{ path('app_admin_posts') }}" class="btn btn-primary">Liste des posts</a>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

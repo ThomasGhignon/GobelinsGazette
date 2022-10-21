@@ -5,22 +5,25 @@ app_home_flash:
     path: /flash
     controller: App\Controller\HomeController::flashMessage
 
-app_post:
-    path: /post
-    controller: App\Controller\PostController::index
 app_post_new:
     path: /post/new
     controller: App\Controller\PostController::create
-app_post_id:
+app_post_show:
     path: /post/{id}
     controller: App\Controller\PostController::show
+app_post_edit:
+    path: /post/edit/{id}
+    controller: App\Controller\PostController::edit
+app_post_delete:
+    path: /post/delete/{id}
+    controller: App\Controller\PostController::delete
 
-#app_user_create:
-#    path: /user/create
-#    controller: App\Controller\UserController::create
 app_user_show:
     path: /user/{id}
     controller: App\Controller\UserController::show
+app_user_edit:
+    path: /user/edit/{id}
+    controller: App\Controller\UserController::edit
 
 app_register:
     path: /signup
@@ -41,3 +44,9 @@ app_admin_users:
 app_admin_user:
     path: /admin/user/{id}
     controller: App\Controller\UserController::edit
+app_admin_posts:
+    path: /admin/posts
+    controller: App\Controller\AdminController::postsList
+app_admin_post:
+    path: /admin/post/{id}
+    controller: App\Controller\PostController::edit

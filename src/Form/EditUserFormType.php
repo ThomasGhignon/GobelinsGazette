@@ -10,10 +10,18 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class EditUserFormType extends AbstractType
 {
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -35,18 +43,27 @@ class EditUserFormType extends AbstractType
                 'required' => true,
                 'attr' => ['class' =>'form-control'],
             ])
-            ->add('roles', ChoiceType::class, [
-                'choices' => [
-                    'Utilisateur' => 'ROLE_USER',
-                    'Editeur' => 'ROLE_EDITOR',
-                    'Administrateur' => 'ROLE_ADMIN'
-                ],
-                'expanded' => true,
-                'multiple' => true,
-                'label' => 'Rôles'
-            ])
-            ->add('valider', SubmitType::class)
         ;
+
+        //if user is administrator, he can change role of user
+        if (in_array('ROLE_ADMIN', $this->security->getUser()->getRoles())) {
+            $builder
+                ->add('roles', ChoiceType::class, [
+                    'choices' => [
+                        'Utilisateur' => 'ROLE_USER',
+                        'Modérateur' => 'ROLE_EDITOR',
+                        'Administrateur' => 'ROLE_ADMIN'
+                    ],
+                    'multiple' => true,
+                    'expanded' => true,
+                    'label' => 'Rôles',
+                ])
+            ;
+        }
+        $builder
+            ->add('valider', SubmitType::class, [
+                'attr' => ['class' =>'btn btn-primary bg-indigo-600 hover:bg-indigo-700'],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

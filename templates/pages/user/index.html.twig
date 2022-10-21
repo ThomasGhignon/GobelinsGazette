@@ -1,15 +1,63 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ user.username }}{% endblock %}
+{% block title %}
+  {{ user.username }}
+{% endblock %}
 
 {% block content %}
-    <div class="container vh-100">
-        <div class="row">
-            <div class="col-12 mt-5">
-                <div class="d-flex justify-content-between">
-                    <h1>{{ user.username }}</h1>
-                </div>
+  <div class="container vh-100">
+    <div class="row">
+      <div class="col-10 mt-5 mx-auto">
+        <div>
+          <div class="flex place-content-between mb-4">
+            <h1 class="h1 m-0 p-0">{{ user.username }}</h1>
+            {% if is_granted('ROLE_ADMIN') %}
+              <a href="/user/edit/{{ user.id }}" class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">{{ modifier }}</a>
+            {% endif %}
+          </div>
+          <div>
+            <div class="user-info mb-4">
+              <div>{{ user.email }}</div>
+              <div>
+                {% for role in user.roles %}
+                  <div class="mt-2 flex items-center text-sm text-gray-500">
+                    <svg class=" w-6 h-6mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
+                    </svg>{{ role }}
+                  </div>
+                {% endfor %}
+              </div>
             </div>
+            <div class="user-posts">
+              <h2 class="h4 mb-4">Publications</h2>
+              {% for post in user.posts %}
+                <a href="/post/{{ post.id }}" class="d-block border-2 rounded-md p-3 mb-3">
+                  <div class="d-flex w-100 justify-content-between items-end border-b-2 pb-2 mb-3">
+                    <div class="flex flex-row items-center text-xl pb-0 mb-0">
+                      <div class="flex flex-row items-center mr-4">
+                        <svg class="w-6 h-6 h-5 w-5 mt-1 flex-shrink-0 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                        </svg>{{ post.likes }}
+                      </div>
+                      <div class="txt-lg">{{ post.title }}</div>
+                    </div>
+                    <small>{{ post.createAt|date('d/m/Y h:m') }}</small>
+                  </div>
+                  <div class="mb-1">
+                    {% if post.content|length %}
+                      <p>{{ (post.content|length) > 800 ? (post.content|slice(0, 801)|split(' ')|slice(0, - 1)|join(' ')) ~ ' …' : post.content }}</p>
+                    {% else %}
+                      <p class="meta">** Pas de description **</p>
+                    {% endif %}
+                  </div>
+                  {# <small>{{ post.author }}</small> #}
+                </a>
+              {% endfor %}
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 {% endblock %}
